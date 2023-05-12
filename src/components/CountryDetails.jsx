@@ -1,23 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, Link  } from "react-router-dom"
+import { DataContext } from "../DataContext";
 
-function CountryDetails({countries}){
+function CountryDetails(){
+    const countries = useContext(DataContext);
     const {id} = useParams();
     const [details, setDetails] = useState([]);
 
-    const handleData = async () => {
-        const response = await fetch(`https://ih-countries-api.herokuapp.com/countries/${id}`)
-        const data = await response.json();
-        console.log(data)
-        setDetails(data) 
-        console.log(details);    
-    }
-
     useEffect(() => {
-        handleData();
+        setDetails(countries.find(country => country.alpha3Code === id))
    }, [id])
    
-
     if (details.length === 0 || id === undefined ){
         return (<div>loading...</div>)
     }
@@ -36,14 +29,13 @@ function CountryDetails({countries}){
     });
 
     return (
-        <>
-        <h1>{id}</h1>
+        <div className="countryDetails">
             <img alt="country-flag" src={flagUrl}/>
             <h1> {details.name.official}</h1>
             <div>Capital: {details.capital}</div>
             <div>Area: {details.area}km<sup>2</sup></div>
             <div>Borders: { details.borders < 1 ? "none" : borders } </div>
-        </>
+        </div>
     )
 }
 

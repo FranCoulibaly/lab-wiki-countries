@@ -9,11 +9,29 @@
 }
 
 .flagImg {
-  max-width: 20%;
+  max-width: 40px;
 }
 .countries .countryContainer {
-  max-width: 25%;
-  float: left;
+  /* max-width: 25%;
+  float: left; */
+  max-height: 80vh;
+  overflow: auto;
+  flex: row;
+
+}
+.country {
+  border: solid .5px #282c34;
+  
+  padding: 5px;
+}
+
+.countriesLayout {
+  display: flex;
+  flex-direction: row;
+}
+.countryDetails {
+  flex-direction: column;
+  margin: auto;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
